@@ -1,0 +1,150 @@
+/*
+  -- Classes que contêm formatos (cores e fontes para elementos de frente e fundo) --
+*/
+.main-back-color {
+  background: #F0F0F0;
+}
+.main-fore-color {
+  color: black;
+}
+.n1-back-color {
+  background: #4B6170;
+}
+.n1-fore-color {
+  color: #F5F5F5;
+}
+.n2-back-color {
+  background: #E4E2E2;
+}
+.n2-fore-color {
+  color: #EFEFEF;
+}
+.n3-back-color {
+  background: #2d2d2d;
+}
+.n3-fore-color {
+  color: #E6E6E6;
+}
+/* para links sem o sublinhado*/
+a.no-underline {
+  text-decoration: none;
+}
+a.menu-button-style, .link-class-style a {
+  text-align: center;
+  font-size: 24px;
+  text-decoration: none;
+  color: #404148;
+}
+a.menu-button-style:hover, .link-class-style a:hover {
+  font-weight: bold;
+  border-bottom: 3px solid #404148;
+}
+.shadow-text {
+  text-shadow: 3px 3px 2px #2d2d2d;
+}
+.article-with-capitular p:first-child::first-letter {
+  margin: 5px;
+  border: 1px dashed black;
+  padding: 8px;
+  font: normal 4em 'Times New Roman','Times',serif;
+  float: left;
+}
+.entry-border {
+  border-left: 2px solid #4B6170;
+  border-right: 2px solid #4B6170;
+}
+.round-border {
+  border-radius: 5px;
+}
+
+/*
+  Classe para o elemento data criado dinamicamente em cada cabeçalho ("header") 
+    de cada página do site
+*/
+.data {
+  margin-left: auto;
+  margin-right: auto;
+  width: 20%;
+  text-align: center;
+  padding: 0.3125em 1em;
+}
+.data strong {
+    padding:2px 3px;
+}
+
+/*
+  Classe para cada caixa de comentário (somente haverá estruturas aqui, 
+    pois as cores serão atribuídas por Javascript)
+*/
+.comment {
+    width: 100%;
+    min-height: 100px;
+}
+/* cabeçalho com o datahora do comentário e o autor */
+.comment p {
+    text-align: left;
+    margin: 8px;
+}
+/* conteúdo do comentário */
+.comment blockquote {
+    quotes: '"' '"';
+    margin: 0 8px 10px 25px;
+    text-align: justify;
+}
+/* botões de ação: responder e citar */
+.comment button .button {
+    float: right;
+    clear: both;
+}
+
+/*
+  Classes para fotos de artigo (classe post) em index.html
+*/
+img .foto {
+  margin: 16px;
+}
+.esquerda {
+  float: left;
+  margin: 0 16px 0 0;
+}
+.direita {
+  float: right;
+  margin: 0 0 16px 16px;
+}
+
+/*
+  Classes para elementos de formulário em contact.php
+*/
+.required:after {
+  content: '*';
+  color: red;
+}
+.input {
+  border-radius: 5px;
+  padding: 3px 5px;
+}
+.button {
+  border-radius: 8px;
+  padding: 0.5em 2em;
+}
+.standard-color {
+  background-color:#111111;
+  color: #E4E2E2;
+}
+.green-color {
+    background-color: forestgreen;
+    color: #E4E2E2;
+}
+.blue-color {
+    background-color: dodgerblue;
+    color: #E4E2E2;
+}
+.button-border {
+  border: 2px solid transparent;
+}
+.input-border {
+  border: 1px solid #323232;
+}
+.input-no-border {
+  border: none;
+}

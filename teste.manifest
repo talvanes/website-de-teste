@@ -1,0 +1,15 @@
+CACHE MANIFEST:
+#2105-03-18
+
+CACHE:
+index.php
+about.html
+css/style.css
+css/classes.css
+css/medias.css
+js/script.js
+js/validacao.js
+images/*
+
+FALLBACK:
+*.html offline.html

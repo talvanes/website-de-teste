@@ -1,0 +1,20 @@
+/* Nossa folha de estilos principal */
+@import url(style.css);
+
+/* Webfonts do Google */
+@import url(http://fonts.googleapis.com/css?family=Lobster);  /* "substitui" Impact */
+@import url(http://fonts.googleapis.com/css?family=Ubuntu);  /* "substitui" Arial */
+@import url(http://fonts.googleapis.com/css?family=Averia+Serif+Libre);  /* "substitui" Times New Roman */
+
+body {
+  font-family: 'Ubuntu';
+}
+header h1 {
+  font-family: 'Lobster';
+}
+#content h2 {
+  font-family: 'Averia Serif Libre';
+}
+.about-page > p:first-child::first-letter {
+  font-family: 'Averia Serif Libre';
+}

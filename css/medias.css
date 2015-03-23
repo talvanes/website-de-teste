@@ -1,0 +1,124 @@
+/* Nossa folha de estilos principal */
+@import url(style.css);
+/* WebFonts do Google */
+@import url(font.css);
+
+/* Mídia de impressão */
+@media print {
+  header, #menu, footer {
+    display: none;
+  }
+  #user-form, #welcome-user {
+    display: none;
+  }
+  #content {
+    width: 85%;
+  }
+  .entry {
+    border: none;
+  }
+  form * {
+    display: none;
+  }
+  img {
+    -webkit-filter: grayscale(1);
+    filter: grayscale(1);
+  }
+}
+/* Mídias mobile (telas de celulares e tablets) */
+@media only screen and (max-width:320px) {
+  .entry {
+    border-left: none;
+    border-right: none;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+@media only screen and (max-width:599px) {
+  .data {
+      width: 100%;
+      border-radius: 0;
+  }
+  
+  #menu > ul {
+    display: none;
+  }
+  #menu div.menu-button {
+    display: inline-block;
+    float: left;
+  }
+  #menu div.menu-button > ul {
+    display: none;
+  }
+  
+  #comments {
+    margin-left: auto;
+    margin-right: auto;
+    width: 94%;
+  }
+  #user-form, #welcome-user {
+    width: 100%;
+		height: 75px;
+		padding-bottom: 20px;
+  }
+	#user-form p, #welcome-user p {
+		margin: 0; padding: 0;
+	}
+  #content {
+    margin-left: auto;
+    margin-right: auto;
+    width: 94%;
+    min-height: 620px;
+  }
+  form p {
+    margin: 20px auto 20px auto;
+  }
+  input, textarea, label, button {
+    display: block;
+    clear: both;
+    width: 94%;
+  }
+  button {
+    text-align: center;
+  }
+  
+  #mapaBing {
+    margin-top: 45px;
+    width: 94%;
+  }
+  
+  footer p {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+@media only screen and (min-width:600px) {
+    .data {
+        width: 58%;
+    }
+    #user-form, #welcome-user {
+      width: 60%;
+			height: 70px;
+    }
+		#user-form button {
+			position: absolute;
+			right: 23%;
+			z-index:1001;
+			margin-top: 1.5em;
+		}
+    #menu > ul {
+      display: block;
+    }
+    #menu div.menu-button {
+      display: none;
+    }
+}
+@media only screen and (max-width:992px) {
+}
+/* Monitores de alta resolução (displays Retina) */
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+only screen and (-moz-min-device-pixel-ratio: 1.5),
+only screen and (-o-min-device-pixel-ratio: 3/2),
+only screen and (min-device-pixel-ratio: 1.5) {
+}
