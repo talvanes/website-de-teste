@@ -18,7 +18,7 @@
       <header class="n1-back-color n1-fore-color">
         <h1 class="shadow-text">Website de Teste</h1>
       </header>
-      <nav class="n2-back-color" id="menu">
+      <nav class="n1-back-color" id="menu">
         <ul class="link-class-style">
             <li><a href="index.php">Início</a></li>
             <li><a href="about.html">Sobre</a></li>
@@ -27,14 +27,14 @@
         <div class="menu-button">
           <a class="menu-button-style" href="#">&#9776; Menu</a>
           <ul class="link-class-style">
-              <li><a class="n2-back-color" href="index.php">Início</a></li>
-              <li><a class="n2-back-color" href="about.html">Sobre</a></li>
-              <li><a class="n2-back-color" href="contact.html">Contato</a></li>
+              <li><a class="n1-back-color" href="index.php">Início</a></li>
+              <li><a class="n1-back-color" href="about.html">Sobre</a></li>
+              <li><a class="n1-back-color" href="contact.html">Contato</a></li>
           </ul>
         </div>
       </nav>
       
-      <section id="user-form" class="n2-back-color">
+      <section id="user-form" class="n1-back-color">
         <form method="post">
           <p>
             <label for="username">Qual é o seu nome?</label>
@@ -43,7 +43,7 @@
           <p><button class="button button-border standard-color" type="submit" onclick="criarCaixaUsuario();">Enviar</button></p>
         </form>
       </section>
-      <section id="welcome-user" class="n2-back-color">
+      <section id="welcome-user" class="n1-back-color">
         <p></p>
       </section>
       
@@ -99,7 +99,7 @@
         <?php endforeach; ?>
         
       </section>
-      <footer class="n2-back-color">
+      <footer class="n1-back-color">
         <p class="n1-back-color n1-fore-color round-border">Copyright <sup>&copy;</sup> 2015. <strong style="font-style:italic">Fict&iacute;cia SA</strong>. Todos os direitos reservados.</p>
       </footer>
       </section>
