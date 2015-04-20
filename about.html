@@ -22,14 +22,14 @@
         <ul class="link-class-style">
             <li><a href="index.php">Início</a></li>
             <li><a href="about.html">Sobre</a></li>
-            <li><a href="contact.html">Contato</a></li>
+            <li><a href="contact.php">Contato</a></li>
         </ul>
         <div class="menu-button">
           <a class="menu-button-style" href="#">&#9776; Menu</a>
           <ul class="link-class-style">
               <li><a class="n2-back-color" href="index.php">Início</a></li>
               <li><a class="n2-back-color" href="about.html">Sobre</a></li>
-              <li><a class="n2-back-color" href="contact.html">Contato</a></li>
+              <li><a class="n2-back-color" href="contact.php">Contato</a></li>
           </ul>
         </div>
       </nav>

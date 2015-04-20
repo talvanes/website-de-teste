@@ -25,14 +25,14 @@
         <ul class="link-class-style">
             <li><a href="index.php">Início</a></li>
             <li><a href="about.html">Sobre</a></li>
-            <li><a href="contact.html">Contato</a></li>
+            <li><a href="contact.php">Contato</a></li>
         </ul>
         <div class="menu-button">
           <a class="menu-button-style" href="#">&#9776; Menu</a>
           <ul class="link-class-style">
               <li><a class="n2-back-color" href="index.php">Início</a></li>
               <li><a class="n2-back-color" href="about.html">Sobre</a></li>
-              <li><a class="n2-back-color" href="contact.html">Contato</a></li>
+              <li><a class="n2-back-color" href="contact.php">Contato</a></li>
           </ul>
         </div>
       </nav>
@@ -56,7 +56,49 @@
         <form name="form1" action="process.php" method="post" autocomplete="off" onsubmit="return validarFormulario();">
             <p>
               <label for="nome" class="required">Nome Completo:</label>
-              <input type="text" id="nome" class="input input-border" name="nome"  title="Nome e sobrenome" placeholder="Nome completo..." required />
+              <input type="text" list="pessoas" id="nome" class="input input-border" name="nome"  title="Nome e sobrenome" placeholder="Nome completo..." required />
+              <!-- Componente Datalist (será gerado pelo PHP) -->
+              <datalist id="pessoas">
+                <?php 
+                  class DatalistOptions extends RecursiveIteratorIterator {
+                    function __construct($iterator) {
+                      parent::__construct($iterator, self::LEAVES_ONLY);
+                    }
+                    function current() {
+                      return "<option value='".parent::current()."'/>".
+                            parent::current()."</option>\n";
+                    }
+                  }
+                  
+                  $servidor = "localhost";
+                  $usuario = "postgres";
+                  $senha = "N4gy-N1yaz0v";
+                  $banco = "website-teste";
+                  
+                  try {
+                    // Criando a conexão a banco de dados
+                    $conexao = new PDO("pgsql:host=$servidor;port=5432;dbname=$banco", $usuario, $senha);
+                    
+                    // PDO Error no modo de exceção
+                    $conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                    // -- echo "<p>Conectado com sucesso...</p>";
+                    
+                    // obtendo uma lista com os dados de pessoas
+                    $comando = $conexao->prepare("SELECT nome FROM pessoas");
+                    $comando->execute();
+                    
+                    // configurar o array de resultados para associativo
+                    $resultado = $comando->setFetchMode(PDO::FETCH_ASSOC);
+                    foreach (new DatalistOptions(new RecursiveArrayIterator($comando->fetchAll())) as $key => $value) {
+                      echo "$value";
+                    }
+                  } catch (PDOException $ex) {
+                    echo "<p>Falha na conexão: ".$ex->getMessage()."</p>";
+                  }
+                  $conexao = null;
+                ?>
+                <?php  ?>
+              </datalist>
             </p>
             <p>
               <label for="contato" class="required">E-Mail para Contato:</label>
