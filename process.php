@@ -103,8 +103,9 @@
             $comando_comentarios = $conexao->prepare("INSERT INTO comentarios(datahora, pessoaid, email, cor, comentario) VALUES (:datahora, :pessoaid, :email, :cor, :comentario)");
             $comando_comentarios->bindParam(":datahora", $datahora, PDO::PARAM_INT);
             // -- pessoaid (fazer subquery) PDO::PARAM_INT
-            $pessoaid = $conexao->prepare("SELECT id FROM pessoas WHERE nome = :nome");
+            $pessoaid = $conexao->prepare("SELECT id FROM pessoas WHERE nome = :nome AND email = :email");
             $pessoaid->bindParam(':nome', $nome, PDO::PARAM_STR);
+            $pessoaid->bindParam(':email', $email, PDO::PARAM_STR);
             if($pessoaid->execute()){
               # se, após a execução da subquery acima, algum valor tiver sido retornado,
               # pegue-o e utilize-o
@@ -133,7 +134,7 @@
       </section>
       <p style="margin-top: 20px;"><a href="javascript:history.go(-1);">Voltar...</a></p>
       </section>
-      <footer class="n1-back-color">
+      <footer class="n2-back-color">
         <p class="n1-back-color n1-fore-color round-border">Copyright <sup>&copy;</sup> 2015. <strong style="font-style:italic">Fict&iacute;cia SA</strong>. Todos os direitos reservados.</p>
       </footer>
       </section>
