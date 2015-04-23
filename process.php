@@ -85,48 +85,67 @@
           $user = 'postgres';
           $password = 'N4gy-N1yaz0v';
           $dbname = 'website-teste';
+          
           // criando a conexão usando PDO
           $conexao = new PDO("pgsql:host=$host;port=5432;dbname=$dbname", $user, $password);
           $conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+          if (!$conexao){
+            echo "<p>";
+            print_r($conexao->errorInfo());
+            echo "</p>";
+          }
           try {
-            # 3º Passo: preparar alguns comandos de inserção 
-            #           (do tipo "INSERT foo INTO table;")
-            // Comando para a tabela Pessoas
-            $comando_pessoas = $conexao->prepare("INSERT INTO pessoas(nome, datanasc, email, telefone) VALUES (:nome, :datanasc, :email, :telefone)");
-            $comando_pessoas->bindParam(":nome", $nome, PDO::PARAM_STR);
-            $comando_pessoas->bindParam(":datanasc", $datanasc, PDO::PARAM_STR);
-            $comando_pessoas->bindParam(":email", $email, PDO::PARAM_STR);
-            $comando_pessoas->bindParam(":telefone", $telefone, PDO::PARAM_STR);
-            $resultado1 = $comando_pessoas->execute();
-            
-            // Comando para a tabela Comentários
-            $comando_comentarios = $conexao->prepare("INSERT INTO comentarios(datahora, pessoaid, email, cor, comentario) VALUES (:datahora, :pessoaid, :email, :cor, :comentario)");
-            $comando_comentarios->bindParam(":datahora", $datahora, PDO::PARAM_INT);
+            # 3º Passo: verificar se um ID pode ser localizado 
+            #     segundo a pesquisa ("query") abaixo
             // -- pessoaid (fazer subquery) PDO::PARAM_INT
             $pessoaid = $conexao->prepare("SELECT id FROM pessoas WHERE nome = :nome AND email = :email");
             $pessoaid->bindParam(':nome', $nome, PDO::PARAM_STR);
             $pessoaid->bindParam(':email', $email, PDO::PARAM_STR);
             if($pessoaid->execute()){
-              # se, após a execução da subquery acima, algum valor tiver sido retornado,
-              # pegue-o e utilize-o
+              # a execução do comando acima poderá retornar um ID
               $pessoa = $pessoaid->fetch(PDO::FETCH_ASSOC); # transformado em vetor associativo
+              if(empty($pessoa)){
+                # se a pessoa não for localizada, crie um novo ID
+                // Comando para criar uma Pessoa(ID) na tabela Pessoas
+                $comando_pessoas = $conexao->prepare("INSERT INTO pessoas(nome, datanasc, email, telefone) VALUES (:nome, :datanasc, :email, :telefone)");
+                $comando_pessoas->bindParam(":nome", $nome, PDO::PARAM_STR);
+                $comando_pessoas->bindParam(":datanasc", $datanasc, PDO::PARAM_STR);
+                $comando_pessoas->bindParam(":email", $email, PDO::PARAM_STR);
+                $comando_pessoas->bindParam(":telefone", $telefone, PDO::PARAM_STR);
+                $resultado_pessoas = $comando_pessoas->execute();
+                if($resultado_pessoas){
+                  # Depois que uma nova Pessoa foi criada,
+                  #   obter o novo ID executando novamente o primeiro comando, 
+                  #   que é o mesmo acima
+                  if($pessoaid->execute()){
+                    $pessoa = $pessoaid->fetch(PDO::FETCH_ASSOC);
+                    echo "<p>Pessoa $nome, email $email, criada com sucesso!</p>\n";
+                  }
+                } else {
+                  # erro ao inserir o ID
+                  echo "<p>Pessoa $nome, email $email, já existe!</p>\n";
+                }
+                # Pronto. A pessoa foi criada!
+              }
               $id = $pessoa['id'];  # um valor obtido a partir do vetor
             }
-            // --
+            
+            // Comando para "criar" um comentário na tabela Comentários
+            $comando_comentarios = $conexao->prepare("INSERT INTO comentarios(datahora, pessoaid, email, cor, comentario) VALUES (:datahora, :pessoaid, :email, :cor, :comentario)");
+            $comando_comentarios->bindParam(":datahora", $datahora, PDO::PARAM_INT);
+            # o id foi obtido anteriormente
             $comando_comentarios->bindParam(":pessoaid", $id, PDO::PARAM_INT);
             $comando_comentarios->bindParam(":email", $email, PDO::PARAM_STR);
             $comando_comentarios->bindParam(":cor", $cor, PDO::PARAM_STR);
             $comando_comentarios->bindParam(":comentario", $comentario, PDO::PARAM_STR);
-            $resultado2 = $comando_comentarios->execute();
-            
-            # 4º Passo: verificar o sucesso da operação
-            if($resultado1 && $resultado2){
-              echo "Dados inseridos com sucesso!";
+            $resultado_comentarios = $comando_comentarios->execute();
+            if($resultado_comentarios){
+              echo "<p>Comentário inserido com sucesso.</p>";
             } else {
-              echo "Erro ao inserir os dados";
+              echo "<p>Erro ao inserir comentário.</p>";
             }
           } catch (PDOException $ex) {
-            echo 'Erro ao criar a conexão: '.$ex->getMessage();
+            echo "<p>Erro ao criar a conexão: ".$ex->getMessage()."</p>\n";
           }
           // fechando a programação
           $conexao = null;
