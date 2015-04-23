@@ -67,7 +67,7 @@
               <input type="date" id="nasc" class="input input-border" name="nasc"  title="Formato exigido: DD-MM-AAAA" placeholder="DD/MM/AAAA" pattern="^\d{2}\/\d{2}\/\d{4}" required />
             </p>
             <p>
-              <label for="tel">Telefone (BR):</label>
+              <label for="tel">Telefone (<abbr title="Brasil">BR</abbr>):</label>
               <input type="tel" id="tel" class="input input-border" name="tel" 
                      title="Insira um número de telefone com, no mínimo, 8 dígitos (ou 9 dígitos, dependendo da região), juntamente com o DDD, por exemplo em (11) 2134-6655 ou (11) 99878-3211" 
                      placeholder="(XX) XXXX-XXXX | (XX) 9XXXX-XXXX" pattern="^\(\d{2}\) \d{4,5}-\d{4}$" />

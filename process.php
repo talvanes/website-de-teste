@@ -119,11 +119,11 @@
                   #   que é o mesmo acima
                   if($pessoaid->execute()){
                     $pessoa = $pessoaid->fetch(PDO::FETCH_ASSOC);
-                    echo "<p>Pessoa $nome, email $email, criada com sucesso!</p>\n";
+                    echo "<p>Pessoa <strong>$nome</strong>, email <strong>$email</strong>, criada com sucesso!</p>\n";
                   }
                 } else {
                   # erro ao inserir o ID
-                  echo "<p>Pessoa $nome, email $email, já existe!</p>\n";
+                  echo "<p>Pessoa <strong>$nome</strong>, email <strong>$email</strong>, já existe!</p>\n";
                 }
                 # Pronto. A pessoa foi criada!
               }
