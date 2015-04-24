@@ -89,6 +89,8 @@ header h1 {
   margin-bottom: 20px;
   padding-left: 25px;
   padding-right: 25px;
+  word-wrap: break-word;
+  word-break: break-all;
 }
 .entry p {
   min-height: 100px;

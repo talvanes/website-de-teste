@@ -40,7 +40,7 @@
             <label for="username">Qual é o seu nome?</label>
             <input class="input input-border" id="username" name="username" type="text" required/>
           </p>
-          <p><button class="button button-border standard-color" type="submit" onclick="criarCaixaUsuario();">Enviar</button></p>
+          <p><button class="button button-border standard-color" type="button" onclick="criarCaixaUsuario();">Enviar</button></p>
         </form>
       </section>
       <section id="welcome-user" class="n2-back-color">
@@ -131,11 +131,10 @@
             }
             
             // Comando para "criar" um comentário na tabela Comentários
-            $comando_comentarios = $conexao->prepare("INSERT INTO comentarios(datahora, pessoaid, email, cor, comentario) VALUES (:datahora, :pessoaid, :email, :cor, :comentario)");
+            $comando_comentarios = $conexao->prepare("INSERT INTO comentarios(datahora, pessoaid, cor, comentario) VALUES (:datahora, :pessoaid, :cor, :comentario)");
             $comando_comentarios->bindParam(":datahora", $datahora, PDO::PARAM_INT);
             # o id foi obtido anteriormente
             $comando_comentarios->bindParam(":pessoaid", $id, PDO::PARAM_INT);
-            $comando_comentarios->bindParam(":email", $email, PDO::PARAM_STR);
             $comando_comentarios->bindParam(":cor", $cor, PDO::PARAM_STR);
             $comando_comentarios->bindParam(":comentario", $comentario, PDO::PARAM_STR);
             $resultado_comentarios = $comando_comentarios->execute();

@@ -40,7 +40,7 @@
             <label for="username">Qual é o seu nome?</label>
             <input class="input input-border" id="username" name="username" type="text" required/>
           </p>
-          <p><button class="button button-border standard-color" type="submit" onclick="criarCaixaUsuario();">Enviar</button></p>
+          <p><button class="button button-border standard-color" type="button" onclick="criarCaixaUsuario();">Enviar</button></p>
         </form>
       </section>
       <section id="welcome-user" class="n2-back-color">
@@ -81,23 +81,26 @@
           $indice = mt_rand(0, count($fontes)-1);
           $itens = get_feeds($fontes[$indice]);
         ?>
+        <?php if(!empty($itens)) { ?>
         <h2>
           Últimas notícias a partir do site <strong class="n3-back-color round-border">
             <a class="n3-fore-color no-underline" href="<?php echo $itens->link; ?>" target="_blank"><?php echo $itens->title ?></a></strong>
         </h2>
-        <!-- article class="entry entry-border" -->
-        <?php foreach ($itens->item as $item):; ?>
-          <article class="entry entry-border">
-            <h3><?php echo $item->title ?></h3>
-            <p>
-              <?php echo $item->description; ?>
-              <a href="<?php echo $item->link; ?>" target="_blank">Leia mais...</a>
-            </p>
-            <br />
-            <h5 class="n1-back-color n1-fore-color">Publicado em: <?php echo $item->pubDate; ?></h5>
-          </article>
-        <?php endforeach; ?>
-        
+          <!-- article class="entry entry-border" -->
+          <?php foreach ($itens->item as $item):; ?>
+            <article class="entry entry-border">
+              <h3><?php echo $item->title ?></h3>
+              <p>
+                <?php echo htmlspecialchars($item->description); ?>
+                <a href="<?php echo $item->link; ?>" target="_blank">Leia mais...</a>
+              </p>
+              <br />
+              <h5 class="n1-back-color n1-fore-color">Publicado em: <?php echo $item->pubDate; ?></h5>
+            </article>
+          <?php endforeach; ?>
+        <?php } else { ?>
+          <article class="entry">Conteúdo RSS do link <?php echo $itens->link; ?> não válido</article>
+        <?php } ?>
       </section>
       <footer class="n2-back-color">
         <p class="n1-back-color n1-fore-color round-border">Copyright <sup>&copy;</sup> 2015. <strong style="font-style:italic">Fict&iacute;cia SA</strong>. Todos os direitos reservados.</p>

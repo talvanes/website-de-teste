@@ -10,7 +10,8 @@
 function get_feeds($url){
   $content = simplexml_load_file($url);
   if(!isset($content->channel)){
-    die('Conteúdo rss não válido');
+    echo 'Conteúdo rss não válido';
+    return array();
   }
   $itens = $content->channel;
   return $itens;
