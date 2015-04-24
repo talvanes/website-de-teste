@@ -150,7 +150,7 @@
           $conexao = null;
         ?>
       </section>
-      <p style="margin-top: 20px;"><a href="javascript:history.go(-1);">Voltar...</a></p>
+        <p style="margin-top: 20px;"><a href="index.php">Voltar...</a></p>
       </section>
       <footer class="n2-back-color">
         <p class="n1-back-color n1-fore-color round-border">Copyright <sup>&copy;</sup> 2015. <strong style="font-style:italic">Fict&iacute;cia SA</strong>. Todos os direitos reservados.</p>

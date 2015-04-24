@@ -55,8 +55,6 @@
               'http://rss.home.uol.com.br/index.xml',
               'http://rss.uol.com.br/feed/noticias.xml',
               'http://rss.esporte.uol.com.br/ultimas/index.xml',
-              'http://rss.noticias.uol.com.br/economia/ultnot/index.xml',
-              'http://rss.tecnologia.uol.com.br/ultnot/index.xml',
               'http://www.vivaolinux.com.br/index.rdf',
               'http://g1.globo.com/dynamo/rss2.xml',
               'http://g1.globo.com/dynamo/vc-no-g1/rss2.xml',
@@ -66,8 +64,6 @@
               'http://www.dicas-l.com.br/index.rdf',
               'http://feeds.feedburner.com/ubuntued',
               'http://www.infowester.com/newsiw.xml',
-              'https://br.noticias.yahoo.com/brasil/?format=rss',
-              'https://br.noticias.yahoo.com/mundo/?format=rss',
               'https://br.noticias.yahoo.com/tecnologia/?format=rss',
               'https://br.noticias.yahoo.com/entretenimento/?format=rss',
               'http://feeds.feedburner.com/Plantao-INFO',
@@ -81,26 +77,34 @@
           $indice = mt_rand(0, count($fontes)-1);
           $itens = get_feeds($fontes[$indice]);
         ?>
-        <?php if(!empty($itens)) { ?>
-        <h2>
-          Últimas notícias a partir do site <strong class="n3-back-color round-border">
-            <a class="n3-fore-color no-underline" href="<?php echo $itens->link; ?>" target="_blank"><?php echo $itens->title ?></a></strong>
-        </h2>
-          <!-- article class="entry entry-border" -->
-          <?php foreach ($itens->item as $item):; ?>
-            <article class="entry entry-border">
-              <h3><?php echo $item->title ?></h3>
-              <p>
-                <?php echo htmlspecialchars($item->description); ?>
-                <a href="<?php echo $item->link; ?>" target="_blank">Leia mais...</a>
-              </p>
-              <br />
-              <h5 class="n1-back-color n1-fore-color">Publicado em: <?php echo $item->pubDate; ?></h5>
+        
+        <?php try { ?>
+          <?php if(!empty($itens)) { ?>
+          <h2>
+            Últimas notícias a partir do site <strong class="n3-back-color round-border">
+              <a class="n3-fore-color no-underline" href="<?php echo $itens->link; ?>" target="_blank"><?php echo $itens->title ?></a></strong>
+          </h2>
+            <!-- article class="entry entry-border" -->
+            <?php foreach ($itens->item as $item):; ?>
+              <article class="entry entry-border">
+                <h3><?php echo $item->title ?></h3>
+                <p>
+                  <?php echo $item->description; ?>
+                  <a href="<?php echo $item->link; ?>" target="_blank">Leia mais...</a>
+                </p>
+                <br />
+                <h5 class="n1-back-color n1-fore-color">Publicado em: <?php echo $item->pubDate; ?></h5>
+              </article>
+            <?php endforeach; ?>
+          <?php } else { ?>
+            <article class="entry">Conteúdo RSS do link <?php echo $itens->link; ?> não válido</article>
+          <?php } ?>
+        <?php } catch(Exception $ex) { ?>
+            <article class="entry">
+              <?php echo "Mensagem de erro: {$ex->getMessage()}"; ?>
             </article>
-          <?php endforeach; ?>
-        <?php } else { ?>
-          <article class="entry">Conteúdo RSS do link <?php echo $itens->link; ?> não válido</article>
         <?php } ?>
+          
       </section>
       <footer class="n2-back-color">
         <p class="n1-back-color n1-fore-color round-border">Copyright <sup>&copy;</sup> 2015. <strong style="font-style:italic">Fict&iacute;cia SA</strong>. Todos os direitos reservados.</p>
