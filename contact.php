@@ -112,7 +112,7 @@
                 // percorrer o 'vetor' obtido
                 foreach ($comentarios as $i => $com) {
                   #cada comentário terá seu próprio id atribuído por meio do campo datahora
-                  $Id = $i.' '.$com['datahora'];
+                  $Id = $com['datahora'];
                   echo "<article id='$Id' class='comment round-border' style='background-color: {$com['cor']}'>\n";
                   
                   # cabeçalho com a datahora do comentário e o autor
