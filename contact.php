@@ -88,14 +88,61 @@
           </form>
       </section>
       
+      <section id="comments">
+          <!-- Área de comentários -->
+          <?php 
+            try { 
+              # 1) Criar uma conexão para o banco de dados 'website-teste'
+              // alguns parâmetros do PostgreSql
+              $host = 'localhost';
+              $user = 'postgres';
+              $password = 'N4gy-N1yaz0v';
+              $dbname = 'website-teste';
+              // criando a conexão usando PDO
+              $conexao = new PDO("pgsql:host=$host;port=5432;dbname=$dbname", $user, $password);
+              $conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+              
+              # 2) Listar os comentários (será retornado como vetor associativo)
+              $comando = $conexao->query("SELECT datahora, nome, email, cor, comentario FROM comentarios LEFT OUTER JOIN pessoas ON pessoas.id = comentarios.pessoaid ORDER BY datahora DESC;");
+              $resultado = $comando->execute();
+              // verificar o resultado da execução 
+              if($resultado){
+                # 3) em caso afirmativo, retornar TODOS os resultados
+                $comentarios = $comando->fetchAll(PDO::FETCH_ASSOC);
+                // percorrer o 'vetor' obtido
+                foreach ($comentarios as $i => $com) {
+                  #cada comentário terá seu próprio id atribuído por meio do campo datahora
+                  $Id = $i.' '.$com['datahora'];
+                  echo "<article id='$Id' class='comment round-border' style='background-color: {$com['cor']}'>\n";
+                  
+                  # cabeçalho com a datahora do comentário e o autor
+                  echo "<p>Em <em>{$com['datahora']}</em>, <strong><a class='no-underline' href='mailto:{$com['email']}'>{$com['nome']}</a></strong> escreveu:</p>\n";
+                  # descrição do comentário
+                  echo "<blockquote>{$com['comentario']}</blockquote>\n";
+                  
+                  #botões de ação: responder e citar
+                  echo "<button id='bot-responder' class='button button-border round-border green-color' data-id='$Id'>Responder</button>\n";
+                  echo "<button id='bot-citar' class='button button-border round-border blue-color' data-id='$Id'>Citar</button>\n";
+                  
+                  #fim de comentário
+                  echo "</article>\n";
+                }
+              }
+            } catch (PDOException $ex) {
+              # conexão com base de dados não encontrada
+              echo "Não deu para conectar ao banco de dados $dbname.";
+            } catch (Exception $ex) {
+              #erro desconhecido
+              echo "Erro na aplicação, devido a: {$ex->getMessage()}.";
+            }
+            $conexao = null;
+            ?>
+      </section>
+      
       <!-- Mapa do Bing -->
       <section id="mapaBing">
         <script src="js/mapaDoBing.js">
         </script>
-      </section>
-      
-      <section id="comments">
-          <!-- Área de comentários -->
       </section>
       
       <footer class="n2-back-color">

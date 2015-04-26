@@ -77,8 +77,10 @@ a.menu-button-style:hover, .link-class-style a:hover {
     pois as cores serão atribuídas por Javascript)
 */
 .comment {
+    position: relative;
+    margin-bottom: 23px;
     width: 100%;
-    min-height: 100px;
+    padding: 14px 20px;
 }
 /* cabeçalho com o datahora do comentário e o autor */
 .comment p {
@@ -92,9 +94,10 @@ a.menu-button-style:hover, .link-class-style a:hover {
     text-align: justify;
 }
 /* botões de ação: responder e citar */
-.comment button .button {
-    float: right;
-    clear: both;
+.comment button {
+  position: relative;
+  right: 0;
+  bottom: 45px;
 }
 
 /*
