@@ -33,7 +33,7 @@
           </ul>
         </div>
       </nav>
-      
+
       <section id="user-form" class="n2-back-color">
         <form method="post">
           <p>
@@ -46,7 +46,7 @@
       <section id="welcome-user" class="n2-back-color">
       	<p></p>
       </section>
-      
+
       <section id="content">
         <!-- Exibir os dados já enviados na página process.php -->
         <h2>Esses foram os seus dados:</h2>
@@ -69,7 +69,7 @@
           /*
            * Código para armazenamento dos dados no banco de dados "website-teste"
            */
-           
+
           # 1º Passo: capturar os valores enviados
           $datahora = date(DATE_W3C);
           $nome = filter_input(INPUT_POST, 'nome');
@@ -78,14 +78,14 @@
           $telefone = filter_input(INPUT_POST, 'tel');
           $cor = filter_input(INPUT_POST, 'cor');
           $comentario = filter_input(INPUT_POST, 'comentario');
-          
+
           # 2º Passo: armazenar os valores no banco de dados
           // alguns parâmetros do PostgreSql
           $host = 'localhost';
           $user = 'postgres';
           $password = 'N4gy-N1yaz0v';
           $dbname = 'website-teste';
-          
+
           // criando a conexão usando PDO
           $conexao = new PDO("pgsql:host=$host;port=5432;dbname=$dbname", $user, $password);
           $conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -95,7 +95,7 @@
             echo "</p>";
           }
           try {
-            # 3º Passo: verificar se um ID pode ser localizado 
+            # 3º Passo: verificar se um ID pode ser localizado
             #     segundo a pesquisa ("query") abaixo
             // -- pessoaid (fazer subquery) PDO::PARAM_INT
             $pessoaid = $conexao->prepare("SELECT id FROM pessoas WHERE nome = :nome AND email = :email");
@@ -115,7 +115,7 @@
                 $resultado_pessoas = $comando_pessoas->execute();
                 if($resultado_pessoas){
                   # Depois que uma nova Pessoa foi criada,
-                  #   obter o novo ID executando novamente o primeiro comando, 
+                  #   obter o novo ID executando novamente o primeiro comando,
                   #   que é o mesmo acima
                   if($pessoaid->execute()){
                     $pessoa = $pessoaid->fetch(PDO::FETCH_ASSOC);
@@ -129,7 +129,7 @@
               }
               $id = $pessoa['id'];  # um valor obtido a partir do vetor
             }
-            
+
             // Comando para "criar" um comentário na tabela Comentários
             $comando_comentarios = $conexao->prepare("INSERT INTO comentarios(datahora, pessoaid, cor, comentario) VALUES (:datahora, :pessoaid, :cor, :comentario)");
             $comando_comentarios->bindParam(":datahora", $datahora, PDO::PARAM_INT);

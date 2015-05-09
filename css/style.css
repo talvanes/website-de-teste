@@ -121,6 +121,7 @@ input, textarea {
   float: right;
   width: 60%;
 }
+textarea { resize: none; }
 button {
   float: right;
   display: inline-block;

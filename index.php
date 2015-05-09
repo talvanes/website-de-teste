@@ -33,7 +33,7 @@
           </ul>
         </div>
       </nav>
-      
+
       <section id="user-form" class="n2-back-color">
         <form method="post">
           <p>
@@ -46,7 +46,7 @@
       <section id="welcome-user" class="n2-back-color">
         <p></p>
       </section>
-      
+
       <section id="content">
         <?php include('getFeeds.php'); ?>
         <?php
@@ -77,7 +77,7 @@
           $indice = mt_rand(0, count($fontes)-1);
           $itens = get_feeds($fontes[$indice]);
         ?>
-        
+
         <?php try { ?>
           <?php if(!empty($itens)) { ?>
           <h2>
@@ -104,7 +104,7 @@
               <?php echo "Mensagem de erro: {$ex->getMessage()}"; ?>
             </article>
         <?php } ?>
-          
+
       </section>
       <footer class="n2-back-color">
         <p class="n1-back-color n1-fore-color round-border">Copyright <sup>&copy;</sup> 2015. <strong style="font-style:italic">Fict&iacute;cia SA</strong>. Todos os direitos reservados.</p>

@@ -28,6 +28,7 @@
 /* para links sem o sublinhado*/
 a.no-underline {
   text-decoration: none;
+	padding: 2px;
 }
 a.menu-button-style, .link-class-style a {
   text-align: center;
@@ -58,7 +59,7 @@ a.menu-button-style:hover, .link-class-style a:hover {
 }
 
 /*
-  Classe para o elemento data criado dinamicamente em cada cabeçalho ("header") 
+  Classe para o elemento data criado dinamicamente em cada cabeçalho ("header")
     de cada página do site
 */
 .data {
@@ -73,7 +74,7 @@ a.menu-button-style:hover, .link-class-style a:hover {
 }
 
 /*
-  Classe para cada caixa de comentário (somente haverá estruturas aqui, 
+  Classe para cada caixa de comentário (somente haverá estruturas aqui,
     pois as cores serão atribuídas por Javascript)
 */
 .comment {

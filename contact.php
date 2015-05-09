@@ -9,14 +9,16 @@
     <link rel="stylesheet" href="css/font.css" />
     <link rel="stylesheet" href="css/medias.css" />
     <script src="http://dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0#sthash.8J0r5Ylh.dpuf"></script>
+    <script src="js/tinycolor.js" type="text/javascript"></script>
+    <script src="js/colors.js"></script>
     <script src="js/script.js"></script>
     <script src="js/validacao.js"></script>
-    
+
     <!--[if lt IE 9]>
       <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
   </head>
-  <body class="main-back-color main-fore-color" onload="acompanharDataDeHoje(); carregarDadosDeUsuario();">
+  <body class="main-back-color main-fore-color" onload="acompanharDataDeHoje(); carregarDadosDeUsuario(); colorizeComments();">
     <section id="container">
       <header class="n1-back-color n1-fore-color">
         <h1 class="shadow-text">Website de Teste</h1>
@@ -36,7 +38,7 @@
           </ul>
         </div>
       </nav>
-      
+
       <section id="user-form" class="n2-back-color">
         <form method="post">
           <p>
@@ -49,7 +51,7 @@
       <section id="welcome-user" class="n2-back-color">
       	<p></p>
       </section>
-      
+
       <section id="content">
         <h2>Participe. Sua opinião é muito importante.</h2>
         <p class="n2-back-color">O que você achou do site?</p>
@@ -68,8 +70,8 @@
             </p>
             <p>
               <label for="tel">Telefone (<abbr title="Brasil">BR</abbr>):</label>
-              <input type="tel" id="tel" class="input input-border" name="tel" 
-                     title="Insira um número de telefone com, no mínimo, 8 dígitos (ou 9 dígitos, dependendo da região), juntamente com o DDD, por exemplo em (11) 2134-6655 ou (11) 99878-3211" 
+              <input type="tel" id="tel" class="input input-border" name="tel"
+                     title="Insira um número de telefone com, no mínimo, 8 dígitos (ou 9 dígitos, dependendo da região), juntamente com o DDD, por exemplo em (11) 2134-6655 ou (11) 99878-3211"
                      placeholder="(XX) XXXX-XXXX | (XX) 9XXXX-XXXX" pattern="^\(\d{2}\) \d{4,5}-\d{4}$" />
             </p>
             <p>
@@ -87,11 +89,11 @@
             </p>
           </form>
       </section>
-      
+
       <section id="comments">
           <!-- Área de comentários -->
-          <?php 
-            try { 
+          <?php
+            try {
               # 1) Criar uma conexão para o banco de dados 'website-teste'
               // alguns parâmetros do PostgreSql
               $host = 'localhost';
@@ -101,11 +103,11 @@
               // criando a conexão usando PDO
               $conexao = new PDO("pgsql:host=$host;port=5432;dbname=$dbname", $user, $password);
               $conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-              
+
               # 2) Listar os comentários (será retornado como vetor associativo)
               $comando = $conexao->query("SELECT datahora, nome, email, cor, comentario FROM comentarios LEFT OUTER JOIN pessoas ON pessoas.id = comentarios.pessoaid ORDER BY datahora DESC;");
               $resultado = $comando->execute();
-              // verificar o resultado da execução 
+              // verificar o resultado da execução
               if($resultado){
                 # 3) em caso afirmativo, retornar TODOS os resultados
                 $comentarios = $comando->fetchAll(PDO::FETCH_ASSOC);
@@ -114,16 +116,12 @@
                   #cada comentário terá seu próprio id atribuído por meio do campo datahora
                   $Id = $com['datahora'];
                   echo "<article id='$Id' class='comment round-border' style='background-color: {$com['cor']}'>\n";
-                  
+
                   # cabeçalho com a datahora do comentário e o autor
-                  echo "<p>Em <em>{$com['datahora']}</em>, <strong><a class='no-underline' href='mailto:{$com['email']}'>{$com['nome']}</a></strong> escreveu:</p>\n";
+                  echo "<p>Em <em>{$com['datahora']}</em>, <strong><a class='no-underline round-border' href='mailto:{$com['email']}'>{$com['nome']}</a></strong> escreveu:</p>\n";
                   # descrição do comentário
                   echo "<blockquote>{$com['comentario']}</blockquote>\n";
-                  
-                  #botões de ação: responder e citar
-                  echo "<button id='bot-responder' class='button button-border round-border green-color' data-id='$Id'>Responder</button>\n";
-                  echo "<button id='bot-citar' class='button button-border round-border blue-color' data-id='$Id'>Citar</button>\n";
-                  
+
                   #fim de comentário
                   echo "</article>\n";
                 }
@@ -138,13 +136,13 @@
             $conexao = null;
             ?>
       </section>
-      
+
       <!-- Mapa do Bing -->
       <section id="mapaBing">
         <script src="js/mapaDoBing.js">
         </script>
       </section>
-      
+
       <footer class="n2-back-color">
         <p class="n1-back-color n1-fore-color round-border">Copyright <sup>&copy;</sup> 2015. <strong style="font-style:italic">Fict&iacute;cia SA</strong>. Todos os direitos reservados.</p>
       </footer>

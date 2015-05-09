@@ -1,5 +1,5 @@
 <?php
-/* 
+/*
  * Função para importar feeds de um site.
  * Baseado no algoritmo de Rafael Wender Pinheiro,
  * disponível em http://www.rafaelwendel.com/2011/11/funcao-php-para-importar-feeds-de-qualquer-site/
